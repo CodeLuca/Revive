@@ -1,0 +1,206 @@
+// Mixins
+// _mixins.scss
+
+// File for placing mixins that are not specific to any component
+
+// Box-shadow
+// Used to add box-shadow across browser prefixes
+@mixin box-shadow($value) {
+  -webkit-box-shadow: #{$value};
+  -moz-box-shadow: #{$value};
+  box-shadow: #{$value};
+}
+
+// Box-sizing
+// Used to add box-sizing across browser prefixes
+@mixin box-sizing($value: border-box) {
+  -webkit-box-sizing: #{$value};
+  -moz-box-sizing: #{$value};
+  box-sizing: #{$value};
+}
+
+// Clearfix
+// Used to clear floats
+@mixin clearfix() {
+  &::before, &::after {
+    content: " ";
+    display: table; }
+  &::after {
+    clear: both;
+  }
+}
+
+// Import Once
+// Used to prevent styles from being loaded multiple times for compenents that rely on other components.
+$modules: () !default;
+@mixin exports($name) {
+  @if (index($modules, $name) == false) {
+    $modules: append($modules, $name);
+    @content;
+  }
+}
+
+// Intrinsic and Extrinsic Sizing
+// Used to add vendor prefixes for values for intrinsic and extrinsic sizing
+//
+// Notes
+//   CSS Intrinsic & Extrinsic Sizing is currently a W3C working draft.
+//   Use with caution
+//   Link to specification: http://www.w3.org/TR/css3-sizing/
+//   Link to browser support statistics: http://caniuse.com/#feat=intrinsic-width
+//
+// Config
+//   $property: CSS property to which sizing value is assigned to
+//     Type: String
+//   $value: Specify intrinsic/extrinsic sizing value
+//     Type: String
+//
+@mixin sizing($property, $value) {
+  @if $property == height {
+    height: -webkit-#{$value};
+    height: -moz-#{$value};
+    height: $value;
+  }
+
+  @else if $property == width {
+    width: -webkit-#{$value};
+    width: -moz-#{$value};
+    width: $value;
+  }
+
+  @else if $property == min-height {
+    min-height: -webkit-#{$value};
+    min-height: -moz-#{$value};
+    min-height: $value;
+  }
+
+  @else if $property == min-width {
+    min-width: -webkit-#{$value};
+    min-width: -moz-#{$value};
+    min-width: $value;
+  }
+
+  @else if $property == max-height {
+    max-height: -webkit-#{$value};
+    max-height: -moz-#{$value};
+    max-height: $value;
+  }
+
+  @else if $property == max-width {
+    max-width: -webkit-#{$value};
+    max-width: -moz-#{$value};
+    max-width: $value;
+  }
+
+  @else if $property == column-width {
+    column-width: -webkit-#{$value};
+    column-width: -moz-#{$value};
+    column-width: $value;
+  }
+
+  @else {
+    @error "$property value of intrinsic/extrinsic sizing mixin not entered or invalid."
+  }
+}
+
+// Menu icon
+// Used to create a menu icon
+//
+// Config
+//   $color: Specify color of menu icon
+//     Type: color
+//   $thickness: Specify thickness of bars in menu icon
+//     Type: Integer
+//     Unit: px
+//   $height: Specify the height of the menu icon
+//     Type: Integer
+//     Unit: px
+//   $width: Specify the width of the menu icon
+//     Type: Integer
+//     Unit: px
+//   $hover-color: Specify color of menu icon on hover
+//     Type: color, boolean
+//     Default: false
+//   $scale: Specify a scale-factor to increase icon size by
+//     Type: Integer
+//     Default: 1
+//
+@mixin menu-icon($color, $gap, $thickness, $height, $width, $hover-color, $scale: 1) {
+  display: block;
+  position: relative;
+  height: $height;
+  width: $width;
+  transform: scale($scale);
+
+  &::before, &::after {
+    display: block;
+    height: 0;
+    width: $width;
+    transition: box-shadow 0.5s ease, transform 0.5s ease;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    box-shadow:
+      0 0 0 $thickness $color,
+      0 $gap + $thickness 0 $thickness $color,
+      0 (2 * $gap + 2 * $thickness) 0 $thickness $color;
+  }
+
+  @if $hover-color {
+
+    &:hover {
+
+      &::after {
+        box-shadow:
+          0 0 0 $thickness $hover-color,
+          0 $gap + $thickness 0 $thickness $hover-color,
+          0 (2 * $gap + 2 * $thickness) 0 $thickness $hover-color;
+      }
+    }
+  }
+
+  &.close {
+    padding-top: rem-calc(15);
+
+    &::before, &::after {
+      box-shadow: 0 0 0 $thickness $color;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// Transform
+// Used to add vendor prefixes for the transform property
+//
+// Config
+//   $value: Specify transform value
+//     Type: String
+//
+@mixin transform($value) {
+  -webkit-transform: #{$value};
+  -ms-transform: #{$value};
+  transform: #{$value};
+}
+
+// Transform-origin
+// Used to add vendor prefixes for the transform-origin property
+//
+// Config
+//   $value: Specify the transform-origin value
+//     Type: String
+//
+@mixin transform-origin($value) {
+  -webkit-transform: #{$value};
+  -ms-transform-origin: #{$value};
+  -moz-transform-origin: #{$value};
+  transform-origin: #{$value};
+}

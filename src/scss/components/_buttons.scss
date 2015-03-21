@@ -1,0 +1,20 @@
+// Buttons
+// _buttons.scss
+
+// Styles for buttons
+
+@import "../utils/config";
+
+@mixin rectangular-button($width, $bg-color) {
+  display: block;
+  background-color: $bg-color;
+  padding: rem-calc(10) rem-calc(20);
+  text-align: center;
+  text-decoration: none;
+  width: rem-calc($width);
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    // background-color: $dark-orange;
+  }
+}

@@ -1,0 +1,17 @@
+// Map
+// _map.scss
+
+// Styles for the map
+
+@import "../utils/config";
+@import "../utils/functions";
+@import "../utils/media-queries";
+@import "../utils/mixins";
+@import "../layout/grid";
+
+@include exports("map") {
+  #map-canvas {
+    height: 100%;
+    width: 100%;
+  }
+}

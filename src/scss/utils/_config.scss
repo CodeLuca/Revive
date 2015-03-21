@@ -1,0 +1,59 @@
+// Config
+// _config.scss
+
+// Style configurations that are not specific to any component
+
+@import "mixins";
+
+// Colors
+// Variables for consistant colors
+$black: #111;
+// $gray: #222;
+// $brown: #796856;
+// $light-gray: #ddd;
+// $orange: #f37120;
+// $dark-orange: #c75108;
+$white: #f5f5f5;
+
+// Text direction
+// Control text direction and affected behaviours
+$text-direction: ltr !default;
+$default-float: left !default;
+$opposite-direction: right !default;
+@if $text-direction == ltr {
+  $default-float: left;
+  $opposite-direction: right;
+} @else {
+  $default-float: right;
+  $opposite-direction: left;
+}
+
+// REM base
+// Set base value for REM calculation
+$rem-base: 16px !default;
+
+// Exports
+// Styles that need to be exported to CSS
+@include exports("config") {
+
+  // Global border-box to handle padding and border-widths
+  *, *::before, *::after {
+    @include box-sizing(border-box);
+  }
+
+  // Clearfix everything
+  * {
+    @include clearfix();
+  }
+
+  // Allow creation of full screen pages
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: $white;
+  }
+}
