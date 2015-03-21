@@ -8,7 +8,7 @@ POST - Create [Key, Name, Desc, Photo, Long, Lat]
 codeluca.me:8080/create
 Adds project to database
 
-**Key - ** API Key to add data to database.
+*Key - * API Key to add data to database.
 
 **Name - ** Project Name
 **Desc - ** Project Description
