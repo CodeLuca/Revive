@@ -439,7 +439,7 @@ th {
   padding: 0;
 }
 
-/* line 40, ../scss/utils/_config.scss */
+/* line 37, ../scss/utils/_config.scss */
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -456,14 +456,14 @@ th {
   clear: both;
 }
 
-/* line 50, ../scss/utils/_config.scss */
+/* line 47, ../scss/utils/_config.scss */
 html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
 }
 
-/* line 56, ../scss/utils/_config.scss */
+/* line 53, ../scss/utils/_config.scss */
 body {
   background-color: whitesmoke;
 }
@@ -474,9 +474,56 @@ body {
   width: 100%;
 }
 
-/* line 16, ../scss/layout/_header.scss */
+/* line 51, ../scss/components/_typography.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+}
+
+/* line 56, ../scss/components/_typography.scss */
+h1 {
+  font-size: 2.98598rem;
+}
+
+/* line 60, ../scss/components/_typography.scss */
+h2 {
+  font-size: 2.48832rem;
+}
+
+/* line 64, ../scss/components/_typography.scss */
+h3 {
+  font-size: 2.0736rem;
+}
+
+/* line 68, ../scss/components/_typography.scss */
+h4 {
+  font-size: 1.728rem;
+}
+
+/* line 72, ../scss/components/_typography.scss */
+h5 {
+  font-size: 1.44rem;
+}
+
+/* line 76, ../scss/components/_typography.scss */
+h6 {
+  font-size: 1.2rem;
+}
+
+/* line 94, ../scss/components/_typography.scss */
+.logo {
+  font-size: 2.3rem;
+}
+
+/* line 100, ../scss/components/_typography.scss */
+body {
+  color: #111111;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+}
+
+/* line 18, ../scss/layout/_header.scss */
 header.global {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   background-color: #00acc1;
   padding: 0 0.625rem;
   position: fixed;
@@ -485,58 +532,101 @@ header.global {
   z-index: 10000;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 16, ../scss/layout/_header.scss */
+  /* line 18, ../scss/layout/_header.scss */
   header.global {
     height: 3.5rem;
   }
 }
-/* line 29, ../scss/layout/_header.scss */
+/* line 30, ../scss/layout/_header.scss */
 header.global > div {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   width: 100%;
   float: left;
+  text-align: center;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 33, ../scss/layout/_header.scss */
+  /* line 35, ../scss/layout/_header.scss */
   header.global > div:first-of-type {
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
-    width: 16.66667%;
+    width: 25%;
     float: left;
   }
-  /* line 37, ../scss/layout/_header.scss */
+  /* line 39, ../scss/layout/_header.scss */
   header.global > div:nth-of-type(2) {
     position: relative;
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
-    width: 16.66667%;
-    left: 66.66667%;
+    width: 25%;
+    left: 50%;
     right: auto;
     float: left;
   }
-  /* line 41, ../scss/layout/_header.scss */
+  /* line 43, ../scss/layout/_header.scss */
   header.global > div:last-of-type {
     position: relative;
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
-    width: 66.66667%;
-    right: 16.66667%;
+    width: 50%;
+    right: 25%;
     left: auto;
     float: left;
+    padding: 0 100px;
   }
 }
+/* line 50, ../scss/layout/_header.scss */
+header.global input {
+  background-color: transparent;
+  box-shadow: none;
+  border: 2px solid whitesmoke;
+  height: auto;
+  width: 100%;
+  transition: border-color 0.5s ease;
+  color: whitesmoke;
+  font-size: 1.5rem;
+  margin: 9.5px 0;
+  padding: 0 20px;
+  transition: padding 0.5s ease;
+}
+/* line 18, ../scss/components/_inputs.scss */
+header.global input:focus {
+  border-color: whitesmoke;
+}
+/* line 22, ../scss/components/_inputs.scss */
+header.global input:valid {
+  border-color: whitesmoke;
+}
+/* line 59, ../scss/layout/_header.scss */
+header.global a.sign-in-button {
+  display: block;
+  background-color: transparent;
+  border: 2px solid whitesmoke;
+  color: whitesmoke;
+  font-family: "Oswald", sans-serif;
+  padding: 0.4375rem 1.25rem;
+  text-align: center;
+  text-decoration: none;
+  width: 6.25rem;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  margin: 7.5px auto;
+}
+/* line 21, ../scss/components/_buttons.scss */
+header.global a.sign-in-button:hover {
+  background-color: whitesmoke;
+  color: #00acc1;
+}
 
-/* line 21, ../scss/pages/_index.scss */
+/* line 23, ../scss/pages/_index.scss */
 #index #main {
   height: 100%;
   transition: transform 0.5s ease, margin 0.5s ease;
 }
 
-/* line 27, ../scss/pages/_index.scss */
+/* line 29, ../scss/pages/_index.scss */
 aside {
-  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
   background-color: whitesmoke;
+  padding: 1.5625rem;
   position: fixed;
   left: -100%;
   z-index: 9000;
@@ -545,28 +635,76 @@ aside {
   transition: left 0.5s ease, width 0.5s ease;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 27, ../scss/pages/_index.scss */
+  /* line 29, ../scss/pages/_index.scss */
   aside {
     width: 50vw;
   }
-  /* line 40, ../scss/pages/_index.scss */
+  /* line 42, ../scss/pages/_index.scss */
   aside.open + #main {
     transform: translate(50vw, 0);
     margin-right: 50vw;
   }
 }
 @media only screen and (min-width: 64.063em) {
-  /* line 27, ../scss/pages/_index.scss */
+  /* line 29, ../scss/pages/_index.scss */
   aside {
     width: 40vw;
   }
-  /* line 49, ../scss/pages/_index.scss */
+  /* line 51, ../scss/pages/_index.scss */
   aside.open + #main {
     transform: translate(40vw, 0);
     margin-right: 40vw;
   }
+  /* line 55, ../scss/pages/_index.scss */
+  aside.open + #main header > div:last-of-type {
+    padding: 0;
+  }
 }
-/* line 55, ../scss/pages/_index.scss */
+/* line 61, ../scss/pages/_index.scss */
+aside .close-trigger {
+  color: #f10d0d;
+  position: absolute;
+  top: 40px;
+  right: 30px;
+}
+/* line 68, ../scss/pages/_index.scss */
 aside.open {
   left: 0;
+}
+/* line 74, ../scss/pages/_index.scss */
+aside form input:not([type="submit"]), aside form textarea {
+  background-color: transparent;
+  box-shadow: none;
+  border: 2px solid #00acc1;
+  height: auto;
+  width: 100%;
+  transition: border-color 0.5s ease;
+}
+/* line 18, ../scss/components/_inputs.scss */
+aside form input:not([type="submit"]):focus, aside form textarea:focus {
+  border-color: #00acc1;
+}
+/* line 22, ../scss/components/_inputs.scss */
+aside form input:not([type="submit"]):valid, aside form textarea:valid {
+  border-color: #4caf50;
+}
+/* line 78, ../scss/pages/_index.scss */
+aside form input[type="submit"] {
+  display: block;
+  background-color: transparent;
+  border: 2px solid #00acc1;
+  color: #00acc1;
+  font-family: "Oswald", sans-serif;
+  padding: 0.4375rem 1.25rem;
+  text-align: center;
+  text-decoration: none;
+  width: 12.5rem;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  font-size: 1.25rem;
+  margin: 0 auto;
+}
+/* line 21, ../scss/components/_buttons.scss */
+aside form input[type="submit"]:hover {
+  background-color: #00acc1;
+  color: whitesmoke;
 }

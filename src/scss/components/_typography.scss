@@ -7,7 +7,7 @@
 @import "../utils/functions";
 @import "../utils/mixins";
 
-$ratio: 1.125;
+$ratio: 1.2;
 $base: 16;
 
 // Logo Typography
@@ -18,85 +18,88 @@ $base: 16;
 
 // Body Typography
 // Control typographic styling for body text
-// $body-sans-serif: "Open sans", sans-serif;
+$body-sans-serif: "Open Sans", sans-serif;
 
-// $body-color: $black;
+$body-color: $black;
 
-// $body-weight: 400;
+$body-weight: 300;
 
 // Heading Typography
 // Control typographic styling for headings
-// $heading-sans-serif: "Roboto", sans-serif;
+$heading-sans-serif: "Oswald", sans-serif;
 
-// $heading-weight: 500;
+$heading-weight: 400;
 
-// $h6-size: rem-calc($base * $ratio);
-// $h5-size: $h6-size * $ratio;
-// $h4-size: $h5-size * $ratio;
-// $h3-size: $h4-size * $ratio;
-// $h2-size: $h3-size * $ratio;
-// $h1-size: $h2-size * $ratio;
+$h6-size: rem-calc($base * $ratio);
+$h5-size: $h6-size * $ratio;
+$h4-size: $h5-size * $ratio;
+$h3-size: $h4-size * $ratio;
+$h2-size: $h3-size * $ratio;
+$h1-size: $h2-size * $ratio;
 
 // Anchor Typography
 // Control typographic styling for anchors
 // $anchor-color: $;
+// $anchor-font-family: $heading-sans-serif;
 // $anchor-text-decoration: none;
 
 // $anchor-hover-color: $;
 // $anchor-hover-text-decoration: underline;
 
-// @include exports("typography") {
+@include exports("typography") {
 
-//   h1, h2, h3, h4, h5, h6 {
-//     font-family: $heading-sans-serif;
-//     font-weight: $heading-weight;
-//   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $heading-sans-serif;
+    font-weight: $heading-weight;
+  }
 
-//   h1 {
-//     font-size: $h1-size;
-//   }
+  h1 {
+    font-size: $h1-size;
+  }
 
-//   h2 {
-//     font-size: $h2-size;
-//   }
+  h2 {
+    font-size: $h2-size;
+  }
 
-//   h3 {
-//     font-size: $h3-size;
-//   }
+  h3 {
+    font-size: $h3-size;
+  }
 
-//   h4 {
-//     font-size: $h4-size;
-//   }
+  h4 {
+    font-size: $h4-size;
+  }
 
-//   h5 {
-//     font-size: $h5-size;
-//   }
+  h5 {
+    font-size: $h5-size;
+  }
 
-//   h6 {
-//     font-size: $h6-size;
-//   }
+  h6 {
+    font-size: $h6-size;
+  }
   
   
-//   a {
-//     color: $anchor-color;
-//     text-decoration: $anchor-text-decoration;
-//     transition: color 0.5s ease;
+  // a {
+  //   color: $anchor-color;
+  //   font-family: $anchor-font-family;
+  //   text-decoration: $anchor-text-decoration;
+  //   transition: color 0.5s ease;
 
-//     &:hover {
-//       color: $anchor-hover-color;
-//       text-decoration: $anchor-hover-text-decoration;
-//     }
-//   }
+  //   &:hover {
+  //     color: $anchor-hover-color;
+  //     text-decoration: $anchor-hover-text-decoration;
+  //   }
+  // }
   
 
-//   .logo {
-//     color: $logo-color;
-//     font-family: $logo-font-family;
-//   }
+  .logo {
+  //   color: $logo-color;
+  //   font-family: $logo-font-family;
+    font-size: 2.3rem;
+  }
 
-//   body {
-//     color: $body-color;
-//     font-family: $body-sans-serif;
-//     font-size: rem-calc($base);
-//   }
-// }
+  body {
+    color: $body-color;
+    font-family: $body-sans-serif;
+    font-size: rem-calc($base);
+  }
+}

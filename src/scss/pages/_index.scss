@@ -7,6 +7,8 @@
 @import "../utils/functions";
 @import "../utils/media-queries";
 @import "../utils/mixins";
+@import "../components/buttons";
+@import "../components/inputs";
 @import "../components/shadows";
 @import "../layout/grid";
 
@@ -25,8 +27,8 @@ $transition-time: 0.5s;
   }
 
   aside {
-    @include card(1);
     background-color: $white;
+    padding: rem-calc(25);
     position: fixed;
     left: -100%;
     z-index: 9000;
@@ -49,11 +51,35 @@ $transition-time: 0.5s;
       &.open + #main {
         transform: translate($sidebar-large-width, 0);
         margin-right: $sidebar-large-width;
+
+        & header > div:last-of-type{
+          padding: 0;
+        }
       }
+    }
+
+    .close-trigger {
+      color: #f10d0d;
+      position: absolute;
+      top: 40px;
+      right: 30px;
     }
 
     &.open {
       left: 0;
+    }
+
+    form {
+
+      input:not([type="submit"]), textarea {
+        @include rectangular-input($blue, $blue, $green);
+      }
+
+      input[type="submit"] {
+        @include rectangular-button(200, $blue, $blue, $white);
+        font-size: rem-calc(20);
+        margin: 0 auto;
+      }
     }
   }
 }

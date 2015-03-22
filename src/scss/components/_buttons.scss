@@ -4,17 +4,22 @@
 // Styles for buttons
 
 @import "../utils/config";
+@import "typography";
 
-@mixin rectangular-button($width, $bg-color) {
+@mixin rectangular-button($width, $border-color, $color, $hover-color) {
   display: block;
-  background-color: $bg-color;
-  padding: rem-calc(10) rem-calc(20);
+  background-color: transparent;
+  border: 2px solid $border-color;
+  color: $color;
+  font-family: $heading-sans-serif;
+  padding: rem-calc(7) rem-calc(20);
   text-align: center;
   text-decoration: none;
   width: rem-calc($width);
-  transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 
   &:hover {
-    // background-color: $dark-orange;
+    background-color: $border-color;
+    color: $hover-color;
   }
 }

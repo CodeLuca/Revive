@@ -6,9 +6,18 @@
     <meta content="" name="description">
     <meta content="Copyright © 2015 Revive" name="copyright">
     <meta name="robots" content="index,follow">
+
     <link href="src/css/style.css" rel="stylesheet" type="text/css">
-    <title>Revive</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300|Oswald" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+    <title>Revive!</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
     <script>
+      var Lat, Lng, marker, points;
+
       function initialize() {
         var mapOptions = {
           // Sets initial centre to the UK.
@@ -37,18 +46,34 @@
           });
         }
 
+        function placeMarker(location) {
+          marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+        }
+
+        for(var i = 0; i < raw_points.length; i++) {
+          points = [];
+          pointsLatLng = new google.maps.LatLng(raw_points[i].lat, raw_points[i].lng);
+          points.push(placeMarker(pointsLatLng));
+        }
+
         google.maps.event.addListener(map, 'click', function(event) {
           if(!(document.getElementById('sidebar').hasClass('open'))) {
-            function placeMarker(location) {
-              var marker = new google.maps.Marker({
-                position: location,
-                map: map
-              });
+            if(!marker) {
+              placeMarker(event.latLng);
+            } else {
+              marker.setMap(null);
+              marker = null;
+              placeMarker(event.latLng);
             }
-            placeMarker(event.latLng);
+
+            Lat = parseFloat(event.latLng.k);
+            Lng = parseFloat(event.latLng.D);
             document.getElementById('sidebar').className = 'open';
             window.setTimeout(function() {
-              map.panTo(event.latLng);
+              map.setCenter(event.latLng);
             },1000);
           }
         });
@@ -67,33 +92,47 @@
   </head>
   <body id="index">
     <aside id="sidebar">
-      <form>
+      <h2>New proposal</h2>
+      <a href="#" class="close-trigger"><i class="fa fa-times fa-2x"></i></a>
+      <form id="proposal">
+        <div>
+          <label>Project name</label>
+          <input name="project_name" type="text" required>
+        </div>
+        <div>
+          <label>Project description</label>
+          <textarea name="project_desc" required>
+          </textarea>
+        </div>
+        <div>
+          <a href="#">Upload photo</a>
+        </div>
+        <!--
+        <div id="details">
+          <span></span>, <span></span>
+        </div>
+        -->
+        <input type="text" name="user_ip" hidden>
+        <input type="submit" value="Submit">
       </form>
     </aside>
     <div id="main" class="global">
       <header class="global">
         <div>
-          <h1>REVIVE</h1>
+          <h1 class="logo">Revive!</h1>
         </div>
         <div>
           <a class="sign-in-button" href="#">Sign in</a>
         </div>
         <div>
           <form>
-            <input type="text">
+            <input type="text" name="search" maxlength="254">
+            <a href="#"></a>
           </form>
         </div>
       </header>
       <div id="map-canvas">
       </div>
     </div>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
-    <script>
-      function getIP(json) {
-        $.post('http://codeluca.me:8080/create','{ip:"  '+json.ip+'"}',function() {console.log(json.ip)},'json');
-      }
-    </script>
-    <script type="application/javascript" src="http://api.ipify.org?format=jsonp&callback=getIP"></script>
   </body>
 </html>

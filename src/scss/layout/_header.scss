@@ -7,15 +7,16 @@
 @import "../utils/functions";
 @import "../utils/media-queries";
 @import "../utils/mixins";
-@import "grid";
+@import "../components/buttons";
+@import "../components/inputs";
 @import "../components/shadows";
+@import "grid";
 
 $header-height: rem-calc(56);
 
 @include exports("header") {
   header.global {
-    @include card(1);
-    background-color: #00acc1;
+    background-color: $blue;
     padding: 0 rem-calc(10);
     position: fixed;
     height: auto;
@@ -25,23 +26,39 @@ $header-height: rem-calc(56);
     @media #{$medium-up} {
       height: $header-height;
     }
-    
+
     > div {
       @include grid-column(12);
+      text-align: center;
 
       @media #{$medium-up} {
         &:first-of-type {
-          @include grid-column(2);
+          @include grid-column(3);
         }
 
         &:nth-of-type(2) {
-          @include grid-column($columns:2, $push: 8);
+          @include grid-column($columns:3, $push: 6);
         }
 
         &:last-of-type {
-          @include grid-column($columns:8, $pull: 2);
+          @include grid-column($columns:6, $pull: 3);
+          padding: 0 100px;
         }
       }
+    }
+
+    input {
+      @include rectangular-input($white, $white, $white);
+      color: $white;
+      font-size: 1.5rem;
+      margin: 9.5px 0;
+      padding: 0 20px;
+      transition: padding 0.5s ease;
+    }
+
+    a.sign-in-button {
+      @include rectangular-button(100, $white, $white, $blue);
+      margin: 7.5px auto;
     }
   }
 }
