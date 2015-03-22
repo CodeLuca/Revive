@@ -477,14 +477,20 @@ body {
 /* line 16, ../scss/layout/_header.scss */
 header.global {
   box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
-  background-color: whitesmoke;
+  background-color: #00acc1;
   padding: 0 0.625rem;
   position: fixed;
-  height: 3.5rem;
+  height: auto;
   width: 100%;
   z-index: 10000;
 }
-/* line 25, ../scss/layout/_header.scss */
+@media only screen and (min-width: 40.063em) {
+  /* line 16, ../scss/layout/_header.scss */
+  header.global {
+    height: 3.5rem;
+  }
+}
+/* line 29, ../scss/layout/_header.scss */
 header.global > div {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
@@ -492,25 +498,31 @@ header.global > div {
   float: left;
 }
 @media only screen and (min-width: 40.063em) {
-  /* line 29, ../scss/layout/_header.scss */
+  /* line 33, ../scss/layout/_header.scss */
   header.global > div:first-of-type {
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
     width: 16.66667%;
     float: left;
   }
-  /* line 33, ../scss/layout/_header.scss */
-  header.global > div:nth-of-type(2) {
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
-    width: 66.66667%;
-    float: left;
-  }
   /* line 37, ../scss/layout/_header.scss */
-  header.global > div:last-of-type {
+  header.global > div:nth-of-type(2) {
+    position: relative;
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
     width: 16.66667%;
+    left: 66.66667%;
+    right: auto;
+    float: left;
+  }
+  /* line 41, ../scss/layout/_header.scss */
+  header.global > div:last-of-type {
+    position: relative;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 66.66667%;
+    right: 16.66667%;
+    left: auto;
     float: left;
   }
 }
@@ -546,12 +558,12 @@ aside {
 @media only screen and (min-width: 64.063em) {
   /* line 27, ../scss/pages/_index.scss */
   aside {
-    width: 25vw;
+    width: 40vw;
   }
   /* line 49, ../scss/pages/_index.scss */
   aside.open + #main {
-    transform: translate(25vw, 0);
-    margin-right: 25vw;
+    transform: translate(40vw, 0);
+    margin-right: 40vw;
   }
 }
 /* line 55, ../scss/pages/_index.scss */

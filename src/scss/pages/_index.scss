@@ -11,7 +11,7 @@
 @import "../layout/grid";
 
 $sidebar-medium-width: 50vw;
-$sidebar-large-width: 25vw;
+$sidebar-large-width: 40vw;
 $transition-time: 0.5s;
 
 @include exports("index") {

@@ -15,13 +15,17 @@ $header-height: rem-calc(56);
 @include exports("header") {
   header.global {
     @include card(1);
-    background-color: $white;
+    background-color: #00acc1;
     padding: 0 rem-calc(10);
     position: fixed;
-    height: $header-height;
+    height: auto;
     width: 100%;
     z-index: 10000;
 
+    @media #{$medium-up} {
+      height: $header-height;
+    }
+    
     > div {
       @include grid-column(12);
 
@@ -31,11 +35,11 @@ $header-height: rem-calc(56);
         }
 
         &:nth-of-type(2) {
-          @include grid-column(8);
+          @include grid-column($columns:2, $push: 8);
         }
 
         &:last-of-type {
-          @include grid-column(2)
+          @include grid-column($columns:8, $pull: 2);
         }
       }
     }
