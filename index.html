@@ -18,6 +18,8 @@
     <script>
       var Lat, Lng, marker, click_marker, raw_points, points;
 
+      points = [];
+
       function initialize() {
         var mapOptions = {
           // Sets initial centre to the UK.
@@ -51,9 +53,12 @@
             raw_points = text;
 
             for(var i = 0; i < raw_points.length; i++) {
-              points = [];
               pointsLatLng = new google.maps.LatLng(raw_points[i].lat, raw_points[i].lng);
-              points.push(placeMarker(pointsLatLng));
+              points.push(pointsLatLng);
+            }
+
+            for(var i = 0; i < points.length; i++) {
+              placeMarker(points[i]);
             }
           }
         );
@@ -63,21 +68,24 @@
             position: location,
             map: map
           });
+
+          return marker;
         }
 
         google.maps.event.addListener(map, 'click', function(event) {
           if(!($('#sidebar').hasClass('open'))) {
             if(!click_marker) {
-              placeMarker(event.latLng);
+              click_marker = placeMarker(event.latLng);
             } else {
-              marker.setMap(null);
-              marker = null;
+              console.log('False');
+              click_marker.setMap(null);
+              click_marker = null;
               click_marker = placeMarker(event.latLng);
             }
 
             Lat = parseFloat(event.latLng.k);
             Lng = parseFloat(event.latLng.D);
-            document.getElementById('sidebar').className = 'open';
+            $('#sidebar').addClass('open');
             window.setTimeout(function() {
               map.setCenter(event.latLng);
             },1000);
