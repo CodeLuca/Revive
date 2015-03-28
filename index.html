@@ -16,7 +16,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="assets/js/scripts.js"></script>
     <script>
-      var Lat, Lng, marker, points;
+      var Lat, Lng, marker, raw_points, points;
 
       function initialize() {
         var mapOptions = {
@@ -46,6 +46,18 @@
           });
         }
 
+        $.get('http://codeluca.me/points',
+          function(text) {
+            raw_points = text;
+
+            for(var i = 0; i < raw_points.length; i++) {
+              points = [];
+              pointsLatLng = new google.maps.LatLng(raw_points[i].lat, raw_points[i].lng);
+              points.push(placeMarker(pointsLatLng));
+            }
+          }
+        );
+
         function placeMarker(location) {
           marker = new google.maps.Marker({
             position: location,
@@ -53,14 +65,8 @@
           });
         }
 
-        for(var i = 0; i < raw_points.length; i++) {
-          points = [];
-          pointsLatLng = new google.maps.LatLng(raw_points[i].lat, raw_points[i].lng);
-          points.push(placeMarker(pointsLatLng));
-        }
-
         google.maps.event.addListener(map, 'click', function(event) {
-          if(!(document.getElementById('sidebar').hasClass('open'))) {
+          if(!($('#sidebar').hasClass('open'))) {
             if(!marker) {
               placeMarker(event.latLng);
             } else {

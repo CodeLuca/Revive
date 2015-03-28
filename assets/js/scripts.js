@@ -1,25 +1,13 @@
 'use strict';
 
-var raw_points;
-
 $.get('http://api.ipify.org?format=text&callback=?',
   function(text) {
     $('input[name="user_ip"]').val(text);
   }
 );
 
-$.get('http://codeluca.me/points',
-  function(text) {
-    raw_points = text;
-  }
-);
-
-Element.prototype.hasClass = function(className) {
-    return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
-};
-  
-
 $('.close-trigger').click(function() {
+  console.log('Click');
   $('aside.open').removeClass('open');
   return false;
 });
