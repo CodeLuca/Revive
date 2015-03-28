@@ -1,6 +1,6 @@
 'use strict';
 
-var raw_points = [];
+var raw_points;
 
 $.get('http://api.ipify.org?format=text&callback=?',
   function(text) {

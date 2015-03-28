@@ -13,8 +13,10 @@
 
 
     <title>Revive!</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
     <script>
-      var Lat, Lng, drop_marker;
+      var Lat, Lng, marker, points;
 
       function initialize() {
         var mapOptions = {
@@ -44,23 +46,26 @@
           });
         }
 
-        //thingy = new google.maps.LatLng(raw_points[1].lat, raw_points[1].lng);
-        //placeMarker(thingy);
+        function placeMarker(location) {
+          marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+        }
+
+        for(var i = 0; i < raw_points.length; i++) {
+          points = [];
+          pointsLatLng = new google.maps.LatLng(raw_points[i].lat, raw_points[i].lng);
+          points.push(placeMarker(pointsLatLng));
+        }
 
         google.maps.event.addListener(map, 'click', function(event) {
           if(!(document.getElementById('sidebar').hasClass('open'))) {
-            function placeMarker(location) {
-              drop_marker = new google.maps.Marker({
-                position: location,
-                map: map
-              });
-            }
-
-            if(!drop_marker) {
+            if(!marker) {
               placeMarker(event.latLng);
             } else {
-              drop_marker.setMap(null);
-              drop_marker = null;
+              marker.setMap(null);
+              marker = null;
               placeMarker(event.latLng);
             }
 
@@ -129,7 +134,5 @@
       <div id="map-canvas">
       </div>
     </div>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
   </body>
 </html>
