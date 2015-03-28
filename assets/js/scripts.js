@@ -7,7 +7,6 @@ $.get('http://api.ipify.org?format=text&callback=?',
 );
 
 $('.close-trigger').click(function() {
-  console.log('Click');
   $('aside.open').removeClass('open');
   return false;
 });
