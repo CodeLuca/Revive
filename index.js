@@ -84,6 +84,7 @@ app.post('/create', function(req, res){
 });
 
 app.get('/points',function(req, res){
+  console.log('new request');
   db.project.find(function(err, docs){
     res.send(docs);
   });
