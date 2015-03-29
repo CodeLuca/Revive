@@ -42,7 +42,7 @@ $(function() {
       
       $.ajax({
         method: 'POST',
-        url: 'http://codeluca.me/create',
+        url: 'http://178.62.120.141/create',
         data: {
           'ip': $('input[name="user_ip"]').val(),
           'name': $('input[name="project_name"]').val(),
