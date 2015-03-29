@@ -2,7 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var app = express()
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://46.101.47.120:27017/test', ['users', 'project']);
+var db = mongojs('mongodb://localhost:27017/test', ['users', 'project']);
 var requestIp = require('request-ip');
 var request = require("request");
 
