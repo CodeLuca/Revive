@@ -5,7 +5,7 @@ var mongojs = require('mongojs');
 var db = mongojs('mongodb://localhost:27017/test', ['users', 'project']);
 var requestIp = require('request-ip');
 var request = require("request");
-require('./routes')(app);
+require('./routes')(app, db);
 
 var ips = [];
 
