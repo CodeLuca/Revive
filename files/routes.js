@@ -1,4 +1,4 @@
-module.exports = function(app, db){
+module.exports = function(app){
 	app.post('/find', function(req, res) {
 	  console.log('new request!')
 	  var str = '[';
