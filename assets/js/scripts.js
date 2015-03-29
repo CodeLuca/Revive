@@ -1,6 +1,7 @@
 'use strict';
 
 $(function() {
+var formTime = null; 
 
   $.get('http://api.ipify.org?format=text&callback=?',
     function(text) {
@@ -15,7 +16,16 @@ $(function() {
 
   $('form#proposal').submit(function(event) {
     event.preventDefault();
+    if (formTime != null){
+      if(Date.now() - formTime > 60000){
+        formTime = null;
+      } else {
+        alert('Please wait 60 seconds before submitting another project. \n Thank you.')
+        return;
+      }
+    }
 
+    formTime = Date.now();
     // var check_login = function() {
 
     // };
@@ -38,8 +48,7 @@ $(function() {
       console.log('Error');
     }
     
-    if(form_valid) {
-      
+    if(form_valid) {      
       $.ajax({
         method: 'POST',
         url: 'http://178.62.120.141/create',
