@@ -19,6 +19,7 @@ app.use(function(req, res, next) {
 });
 
 app.post('/find', function(req, res) {
+  console.log('new request!')
   var str = '[';
     db.project.find(function(err, docs) {
         var find = false;
@@ -54,12 +55,13 @@ app.post('/create', function(req, res){
   var long = req.body.lng.toString();
   var lat = req.body.lat.toString();
   var body = req.body;
-
-  request("http://api.tiles.mapbox.com/v4/geocode/mapbox.places/"+ long + "," + lat + ".json?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.hAMX5hSW-QnTeRCMAy9A8Q", 
+  var link = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + long + "&result_type=postal_code&key=AIzaSyDXCn4rCMe3glOZ5bDDazJPd0WY4xmCOg0";
+  request(link,
   function(err, response, json) {
+    console.log(link);
     json = JSON.parse(json);
     if(err) console.log(err);
-    var code = json.features[0].context[1].text.replace(/\s+/g, '');
+    var code = json.results[0].address_components[0].short_name.replace(/\s+/g, '');
     request("http://www.theyworkforyou.com/api/getMP?postcode=" + code + "&output=js&key=DwYWcpGWgECfBVxJVHFqc7bx&output=js",
       function(err, response, b){
         b = JSON.parse(b);
