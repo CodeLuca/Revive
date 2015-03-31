@@ -1,5 +1,6 @@
 var express = require('express')
 var bodyParser = require('body-parser');
+var cors = require('cors');
 var app = express()
 var mongojs = require('mongojs');
 var db = mongojs('mongodb://localhost:27017/test', ['users', 'project']);
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.enable('trust proxy');
 app.use(session({secret: '1234567890QWERTY'}));
+app.use(cors());
 
 require('./files/routes')(app, db);
 require('./files/accounts/signup')(app, bcrypt, db);
