@@ -8,16 +8,19 @@ var requestIp = require('request-ip');
 var request = require("request");
 var bcrypt = require('bcrypt');
 var session = require('express-session')
+var expressHbs = require('express-handlebars')
 
+app.engine('hbs', expressHbs({extname:'hbs', defaultLayout:'main.hbs'}));
+app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.enable('trust proxy');
 app.use(session({secret: '1234567890QWERTY'}));
+app.enable('trust proxy');
 app.use(cors());
 
 require('./files/routes')(app, db);
 require('./files/accounts/signup')(app, bcrypt, db);
-require('./files/accounts/login')(app, bcrypt, db);
+require('./files/accounts/login')(app, bcrypt, db, session);
 
 var ips = [];
 
@@ -28,6 +31,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res){
+	console.log('/ ' + req.session.username);
 	res.send('Hello ' + req.session.username);
 });
 
