@@ -31,8 +31,12 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res){
-	console.log('/ ' + req.session.username);
-	res.send('Hello ' + req.session.username);
+	if(!req.session.username)
+		res.redirect('/login')
+	else {
+		var data = {name: req.session.username}
+		res.render('dashboard', data);
+	}
 });
 
 app.get('*', function(req, res){
