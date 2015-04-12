@@ -1,0 +1,85 @@
+// Index
+// _index.scss
+
+// Styles for the index
+
+@import "../utils/config";
+@import "../utils/functions";
+@import "../utils/media-queries";
+@import "../utils/mixins";
+@import "../components/buttons";
+@import "../components/inputs";
+@import "../components/shadows";
+@import "../layout/grid";
+
+$sidebar-medium-width: 50vw;
+$sidebar-large-width: 40vw;
+$transition-time: 0.5s;
+
+@include exports("index") {
+
+  #index {
+
+    #main {
+      height: 100%;
+      transition: transform #{$transition-time} ease, margin #{$transition-time} ease;
+    }
+  }
+
+  aside {
+    background-color: $white;
+    padding: rem-calc(25);
+    position: fixed;
+    left: -100%;
+    z-index: 9000;
+    height: 100%;
+    width: 100%;
+    transition: left #{$transition-time} ease, width #{$transition-time} ease;
+
+    @media #{$medium-up} {
+      width: $sidebar-medium-width;
+
+      &.open + #main {
+        transform: translate($sidebar-medium-width, 0);
+        margin-right: $sidebar-medium-width;
+      }
+    }
+
+    @media #{$large-up} {
+      width: $sidebar-large-width;
+
+      &.open + #main {
+        transform: translate($sidebar-large-width, 0);
+        margin-right: $sidebar-large-width;
+
+        & header > div:last-of-type{
+          padding: 0;
+        }
+      }
+    }
+
+    .close-trigger {
+      color: #f10d0d;
+      position: absolute;
+      top: 40px;
+      right: 30px;
+    }
+
+    &.open {
+      left: 0;
+    }
+
+    form {
+
+      input:not([type="submit"]), textarea {
+        @include rectangular-input($blue, $blue, $green);
+      }
+
+      input[type="submit"] {
+        @include rectangular-button(200, $blue, $blue, $white);
+        font-size: rem-calc(20);
+        margin: 0 auto;
+      }
+    }
+  }
+}

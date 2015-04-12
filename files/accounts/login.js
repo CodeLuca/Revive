@@ -1,9 +1,10 @@
 module.exports = function(app, bcrypt, db) {
     app.get('/login', function(req, res) {
-        var data = {
-            err: ''
+        if (req.session.username) {
+            res.redirect('/dashboard');
+            return;
         }
-        res.render('login', data);
+        res.render('login');
     });
 
     app.post('/login', function(req, res) {
@@ -17,8 +18,7 @@ module.exports = function(app, bcrypt, db) {
                 if (compare(pass, docs[0].password)) {
                     req.session.username = user;
                     console.log(req.session.username);
-                    console.log(docs[0].username + ' Logged in.');
-                    res.redirect('/');
+`                    res.redirect('/dashboard');
                 } else {
                     var data = {
                         err: 'Error! Incorrect username or password'

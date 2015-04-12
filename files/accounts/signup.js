@@ -1,5 +1,9 @@
 module.exports = function(app, bcrypt, db) {
     app.get('/register', function(req, res) {
+        if (req.session.username) {
+            res.redirect('/dashboard');
+            return;
+        }
         var data = {
             err: ''
         }

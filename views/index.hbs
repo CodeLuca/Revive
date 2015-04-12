@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html id="site" ng-app="site">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="Copyright © 2015 Revive" name="copyright">
+    <meta name="robots" content="index,follow">
+
+    <link href="src/css/style.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300|Oswald" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+    <title>Revive!</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+      var Lat, Lng, marker, click_marker, raw_points, points;
+
+      points = [];
+
+      function initialize() {
+        var mapOptions = {
+          // Sets initial centre to the UK.
+          center: {lat: 51, lng: 0.1167},
+          // Sets initial zoom to 6.
+          zoom: 6,
+          mapTypeControlOptions: {
+            // Prevents user from changing map type.
+            mapTypeIds: [],
+          },
+          panControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+          },
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
+          }
+        };
+
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var client_location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(client_location);
+            map.setZoom(13);
+          });
+        }
+
+        $.get('http://localhost:1337/points',
+          function(text) {
+            raw_points = text;
+
+            for(var i = 0; i < raw_points.length; i++) {
+              pointsLatLng = new google.maps.LatLng(raw_points[i].lat, raw_points[i].lng);
+              points.push(pointsLatLng);
+            }
+
+            for(var i = 0; i < points.length; i++) {
+              placeMarker(points[i]);
+            }
+          }
+        );
+
+        function placeMarker(location) {
+          marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+
+          return marker;
+        }
+
+        google.maps.event.addListener(map, 'click', function(event) {
+          if(!($('#sidebar').hasClass('open'))) {
+            if(!click_marker) {
+              click_marker = placeMarker(event.latLng);
+            } else {
+              click_marker.setMap(null);
+              click_marker = null;
+              click_marker = placeMarker(event.latLng);
+            }
+
+            Lat = parseFloat(event.latLng.k);
+            Lng = parseFloat(event.latLng.D);
+            $('#sidebar').addClass('open');
+            window.setTimeout(function() {
+              map.setCenter(event.latLng);
+            },1000);
+          }
+        });
+      }
+
+      function loadMapScript() {
+        var script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&callback=initialize';
+        document.body.appendChild(script);
+      }
+
+      window.onload = loadMapScript;
+    </script>
+  </head>
+  <body id="index">
+    <aside id="sidebar">
+      <h2>New proposal</h2>
+      <a href="#" class="close-trigger"><i class="fa fa-times fa-2x"></i></a>
+      <form id="proposal">
+        <div>
+          <label>Project name</label>
+          <input name="project_name" type="text" required>
+        </div>
+        <div>
+          <label>Project description</label>
+          <textarea name="project_desc" required>
+          </textarea>
+        </div>
+        <div>
+          <a href="#">Upload photo</a>
+        </div>
+        <!--
+        <div id="details">
+          <span></span>, <span></span>
+        </div>
+        -->
+        <input type="text" name="user_ip" hidden>
+        <input type="submit" value="Submit">
+      </form>
+    </aside>
+    <div id="main" class="global">
+      <header class="global">
+        <div>
+          <h1 class="logo">Revive!</h1>
+        </div>
+        <div>
+          <a class="sign-in-button" href="/login">Sign in</a>
+        </div>
+        <div>
+          <form>
+            <input type="text" name="search" maxlength="254">
+            <a href="#"></a>
+          </form>
+        </div>
+      </header>
+      <div id="map-canvas">
+      </div>
+    </div>
+  </body>
+</html>

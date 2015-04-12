@@ -1,4 +1,9 @@
-module.exports = function(app, db){
+module.exports = function(app, db, request){
+	app.get('/logout', function(req, res){
+		delete req.session.username;
+		res.redirect('/login');
+	});
+
 	app.post('/find', function(req, res) {
 	  console.log('new request!')
 	  var str = '[';
@@ -40,7 +45,7 @@ module.exports = function(app, db){
 
 	        console.log('\n' + b.full_name);
 	        console.log('New Create Request: ' + req.body, req.body.ip.toString());
-	        ips.push({ip: req.body.ip.toString(), time: Date.now()});
+	        // ips.push({ip: req.body.ip.toString(), time: Date.now()});
 	        db.project.insert(body);
 	        db.project.find(function(err, docs) {
 	        console.log(JSON.stringify(docs));

@@ -51,7 +51,7 @@ var formTime = null;
     if(form_valid) {      
       $.ajax({
         method: 'POST',
-        url: 'http://178.62.120.141/create',
+        url: 'http://localhost:1337/create',
         data: {
           'ip': $('input[name="user_ip"]').val(),
           'name': $('input[name="project_name"]').val(),

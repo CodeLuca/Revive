@@ -1,0 +1,25 @@
+// Inputs
+// _inputs.scss
+
+// esbgleh
+
+@mixin rectangular-input(
+  $border-color,
+  $border-color-focus,
+  $border-color-valid,
+  $height: auto) {
+  background-color: transparent;
+  box-shadow: none;
+  border: 2px solid $border-color;
+  height: $height;
+  width: 100%;
+  transition: border-color 0.5s ease;
+
+  &:focus {
+    border-color: $border-color-focus;
+  }
+
+  &:valid {
+    border-color: $border-color-valid;
+  }
+}
